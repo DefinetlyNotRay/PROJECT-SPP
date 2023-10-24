@@ -1,3 +1,3 @@
 <?php 
-    $conn = mysqli_connect("localhost","root","","SPP")
+    $conn = mysqli_connect("localhost","root","","spp")
 ?>
