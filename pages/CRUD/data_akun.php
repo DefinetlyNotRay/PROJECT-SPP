@@ -43,7 +43,8 @@
                 <div class="max-w-full overflow-x-auto">
                     <table class="table-auto w-full">
                         <thead>
-                            <tr class="bg-primary text-center">
+                           
+                            <tr class="bg-blue-700 text-center">
                                 <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4">
                                     No
                                 </th>
@@ -65,30 +66,40 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <?php 
+                                require("../../connection.php");
+                                $no = 1;
+                                $query = mysqli_query($conn,"SELECT * FROM `data_akun`");
+                                while($row = mysqli_fetch_array($query)){
+                            ?>
                             <tr>
+                                <th class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
+                                    <?php echo $no++ ?>
+                                </th>
+                                <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-[#E8E8E8]">
+                                    <?php echo $row["username"] ?>
+                                </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                    1 Year
+                                    <?php echo $row["password"] ?>
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-[#E8E8E8]">
-                                    $75.00
+                                    <?php echo $row["nama"] ?>
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                    $5.00
+                                    <?php echo $row["level"] ?>
                                 </td>
-                                <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-[#E8E8E8]">
-                                    $10.00
-                                </td>
-                                <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                    <select>
-                                        <option value="d">s</option>
-                                    </select>
-                                </td>
-                                <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-r border-[#E8E8E8]">
-                                    <a href="javascript:void(0)" class="border border-primary py-2 px-6 text-primary inline-block rounded hover:bg-primary hover:text-white">
-                                        Sign Up
+                                <td class="text-center flex items-center justify-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-r border-[#E8E8E8]">
+                                    <a href="../CRUD_PROCESS/edit.php?id=<?php echo $row['id_akun']; ?>" class="border border-info mr-2 py-2 px-6 text-info inline-block rounded hover:bg-info hover:text-white">
+                                        Edit
+                                    </a>
+                                    <p>&nbsp;&nbsp;</p>
+                                    <a href="../CRUD_PROCESS/delete.php?id=<?php echo $row['id_akun']; ?>" class="border border-warning py-2 px-6 text-warning inline-block rounded hover:bg-warning hover:text-white">
+                                        Delete
                                     </a>
                                 </td>
+
                             </tr>
+                           <?php } ?>
                             <!-- Add more rows as needed -->
                         </tbody>
                     </table>
