@@ -15,11 +15,11 @@ if ($row = $result->fetch_assoc()) {
     $_SESSION['status'] = "login";
 
     if ($row['level'] == 'admin') {
-        header("location:../pages/main/index.php");
+        header("location:../pages/dashboard/index.php");
     } else if ($row['level'] == 'petugas') {
-        header("location:../pages/main/petugas.php");
+        header("location:../pages/dashboard/petugas.php");
     } else if($row['level'] == 'siswa'){
-        header("location:../pages/main/siswa.php");
+        header("location:../pages/dashboard/siswa.php");
     }
 } else {
     // If no match is found, redirect back to index.php with a message

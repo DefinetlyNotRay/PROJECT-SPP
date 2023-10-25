@@ -16,11 +16,11 @@
           <?php 
         if(isset($_GET['msg'])){
             if($_GET['msg'] == "failed"){
-                echo '<p class="text-center font-bold mb-5">Failed to Login, your username or password is wrong!</p>';
+                echo '<p class="mb-5 font-bold text-center">Failed to Login, your username or password is wrong!</p>';
             }else if($_GET['msg'] == "logout"){
-                echo '<p class="text-center font-bold mb-5">successfully logged out</p>';
-            }else if($_GET['msg'] == "not_logged_in"){
-                echo '<p class="text-center font-bold mb-5">You have to login first to access dashboard"</p>';
+                echo '<p class="mb-5 font-bold text-center">successfully logged out</p>';
+            }else if($_GET['msg'] == "not_logged"){
+                echo '<p class="mb-5 font-bold text-center">You have to login first to access dashboard</p>';
             } 
         }
         ?>
@@ -47,7 +47,7 @@
                 Sign in
               </button>
 
-              <p class="text-sm text-center mt-5">
+              <p class="mt-5 text-sm text-center">
                 Dont have an account?
                 <a
                   href="sign-up.php"
