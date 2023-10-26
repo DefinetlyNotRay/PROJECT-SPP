@@ -11,10 +11,10 @@ $statement->execute();
 $result = $statement->get_result();
 
 if ($row = $result->fetch_assoc()) {
-    $_SESSION['username'] = $username;
+        $_SESSION['username'] = $username;
     $_SESSION['status'] = "login";
 
-    if ($row['level'] == 'admin') {
+        if ($row['level'] == 'admin') {
         header("location:../pages/dashboard/index.php");
     } else if ($row['level'] == 'petugas') {
         header("location:../pages/dashboard/petugas.php");

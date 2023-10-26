@@ -23,9 +23,9 @@
       <div style="justify-content:space-between;" class="flex min-w-full px-4 py-5 bg-blue-600 py-auto w-fit">
         <ul class="flex gap-4 py-4 text-white text-m">
             <li><a class="px-5 text-2xl hover:underline" href="./data_kelas.php"><span class="sr-only">(current)</span>Data Kelas</a></li>
-            <li><a class="px-5 text-2xl hover:underline" href="./data_siswa.php">Data Siswa</a></li>
-            <li><a class="px-5 text-2xl first-letter hover:underline " href="./data_spp.php">Data SPP</a></li>
-            <li><a class="px-5 text-2xl font-bold underline" href="./data_akun.php">Data Akun</a></li>
+            <li><a class="px-5 text-2xl first-letter hover:underline" href="./data_siswa.php">Data Siswa</a></li>
+            <li><a class="px-5 text-2xl font-bold underline " href="./data_spp.php">Data SPP</a></li>
+            <li><a class="px-5 text-2xl hover:underline" href="./data_akun.php">Data Akun</a></li>
             <li><a class="px-5 text-2xl hover:underline" href="./data_pembayaran.php">Data Pembayaran</a></li>
         </ul>
         <div class="right-0 flex gap-4 ">
@@ -43,7 +43,7 @@
         <div class="flex flex-wrap justify-center">
             <div class="">
                 <div class="max-w-full">
-                <form action="../edit/akun.php" method="POST">
+                <form action="../edit/spp.php" method="POST">
                     <table class="w-[1440px] table-auto">
                             <thead>   
                                 <tr class="text-center bg-blue-700">
@@ -51,16 +51,10 @@
                                         No
                                     </th>
                                     <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4">
-                                        Username
+                                        Tahun
                                     </th>
                                     <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4">
-                                        Password
-                                    </th>
-                                    <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4">
-                                        Nama
-                                    </th>
-                                    <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4 border-r border-transparent">
-                                        Level
+                                        Nominal
                                     </th>
                                     <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4 border-r border-transparent">
                                         Action
@@ -72,45 +66,19 @@
                                     require("../../../connection.php");
                                     $no = 1;
                                     $id = $_GET["id"];
-                                    $query = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE id_akun = $id ");
+                                    $query = mysqli_query($conn,"SELECT * FROM `data_spp` WHERE id_spp = $id ");
                                     while($row = mysqli_fetch_array($query)){
                                 ?>
                                 <tr>
-                                <input type="hidden" name="id" value="<?php echo $row["id_akun"] ?>" />
+                                <input type="hidden" name="id" value="<?php echo $row["id_spp"] ?>" />
                                     <th class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
                                         <?php echo $no++ ?>
                                     </th>
                                     <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[rgb(243,246,255)] border-b border-[#E8E8E8]">
-                                        <input type="text" name="username" class="max-w-[150px]" value="<?php echo $row["username"] ?>" />
+                                        <input type="text" name="tahun" class="max-w-[150px]" value="<?php echo $row["tahun"] ?>" />
                                     </td>
                                     <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                        <input type="text" name="password" class="max-w-[150px]" value="<?php echo $row["password"] ?>" />
-                                    </td>
-                                    <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-[#E8E8E8]">
-                                    <input type="text" name="nama" class="max-w-[150px]" value="<?php echo $row["nama"] ?>" />
-                                    </td>
-                                    <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                        <?php 
-                                            require("../../../connection.php");
-                                            $levelCol = $row["level"];
-    
-                                        ?>
-                                        
-                                   
-                                        <select name="level">
-                                            <option value="admin" <?php echo ($levelCol == 'admin') ? 'selected="selected"' : ''; ?>> 
-                                                admin
-                                            </option>
-                                            <option value="petugas" <?php echo ($levelCol == 'petugas') ? 'selected="selected"' : ''; ?>> 
-                                                petugas
-                                            </option>
-                                            <option value="siswa" <?php echo ($levelCol == 'siswa') ? 'selected="selected"' : ''; ?>> 
-                                                siswa
-                                            </option>
-                                        </select>
-    
-                                     
-                                    
+                                        <input type="text" name="nominal" class="max-w-[150px]" value="<?php echo $row["nominal"] ?>" />
                                     </td>
                                     <td class="text-center flex items-center justify-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-r border-[#E8E8E8]">
                                         <button type="submit" class="inline-block px-6 py-2 mr-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-600 hover:text-white">

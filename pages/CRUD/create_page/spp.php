@@ -24,9 +24,9 @@
       <div style="justify-content:space-between;" class="flex min-w-full px-4 py-5 bg-blue-600 py-auto w-fit">
         <ul class="flex gap-4 py-4 text-white text-m">
             <li><a class="px-5 text-2xl hover:underline" href="./data_kelas.php"><span class="sr-only">(current)</span>Data Kelas</a></li>
-            <li><a class="px-5 text-2xl hover:underline " href="./data_siswa.php">Data Siswa</a></li>
-            <li><a class="px-5 text-2xl first-letter hover:underline " href="./data_spp.php">Data SPP</a></li>
-            <li><a class="px-5 text-2xl font-bold underline" href="./data_akun.php">Data Akun</a></li>
+            <li><a class="px-5 text-2xl hover:underline" href="./data_siswa.php">Data Siswa</a></li>
+            <li><a class="px-5 text-2xl font-bold underline first-letter " href="./data_spp.php">Data SPP</a></li>
+            <li><a class="px-5 text-2xl hover:underline" href="./data_akun.php">Data Akun</a></li>
             <li><a class="px-5 text-2xl hover:underline" href="./data_pembayaran.php">Data Pembayaran</a></li>
         </ul>
         <div class="right-0 flex gap-4 ">
@@ -43,33 +43,14 @@
     <br><br><br><br><br><br><br>
         <div id="1440px" class="flex items-center justify-center">
             <section class="flex flex-col items-center justify-center gap-5 w-fit">
-                <form method="POST" action="../create/akun.php" class="flex flex-col gap-5">
+                <form method="POST" action="../create/spp.php" class="flex flex-col gap-5">
                     <div class="flex flex-col gap-4 ">
-                        <label class="text-2xl" for="username">Username</label>
-                        <input class="w-96 " name="username" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <label class="text-2xl" for="tahun">Tahun</label>
+                        <input class="w-96 " name="tahun" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
                     </div>
                     <div class="flex flex-col gap-4 ">
-                        <label class="text-2xl">Password</label>
-                        <input class="w-96 " name="password" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
-                    </div>
-                    <div class="flex flex-col gap-4 ">
-                        <label class="text-2xl">Name</label>
-                        <input class="w-96 rounded-xl" name="nama" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
-                    </div>
-                    <div class="flex flex-col gap-4 ">
-                        <label class="text-2xl">Level</label>
-                       
-                        <select name="level" class="pl-5 bg-white w-96 " style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem;">
-                            <option value="admin" > 
-                                Admin
-                            </option>
-                            <option value="petugas"> 
-                                Petugas
-                            </option>
-                            <option value="siswa"> 
-                                Siswa
-                            </option>
-                        </select>
+                        <label class="text-2xl">Nominal</label>
+                        <input class="w-96 " name="nominal" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
                     </div>
                     <button type="submit" class="inline-block px-6 py-2 text-white bg-blue-600 border rounded hover:bg-blue-700">
                         Submit
