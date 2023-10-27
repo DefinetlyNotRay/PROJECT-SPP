@@ -22,8 +22,8 @@
         <ul class="flex gap-4 py-4 text-white text-m">
           <li><a class="px-5 text-2xl font-bold underline " href="dashboard/index.php"><span class="sr-only">(current)</span>Dashboard</a></li>
           <li><a class="px-5 text-2xl hover:underline" href="../CRUD/index.php">CRUD</a></li>
-          <li><a class="px-5 text-2xl hover:underline" href="">Entry Transaksi</a></li>
-          <li><a class="px-5 text-2xl hover:underline" href="">Lihat History</a></li>
+          <li><a class="px-5 text-2xl hover:underline" href="../CRUD/admin/entry.php">Entry Transaksi</a></li>
+          <li><a class="px-5 text-2xl hover:underline" href="../CRUD/admin/history.php">Lihat History</a></li>
         </ul>
         <ul class="flex gap-4 py-4 text-white text-m">
         <li><a class="px-5 text-2xl hover:underline" href="../../login/logout.php">Log Out</a></li>

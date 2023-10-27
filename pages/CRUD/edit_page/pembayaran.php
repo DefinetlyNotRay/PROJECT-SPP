@@ -22,17 +22,17 @@
       </div>
       <div style="justify-content:space-between;" class="flex min-w-full px-4 py-5 bg-blue-600 py-auto w-fit">
         <ul class="flex gap-4 py-4 text-white text-m">
-            <li><a class="px-5 text-2xl hover:underline" href="./data_kelas.php"><span class="sr-only">(current)</span>Data Kelas</a></li>
-            <li><a class="px-5 text-2xl hover:underline" href="./data_siswa.php">Data Siswa</a></li>
-            <li><a class="px-5 text-2xl first-letter hover:underline " href="./data_spp.php">Data SPP</a></li>
-            <li><a class="px-5 text-2xl hover:underline" href="./data_akun.php">Data Akun</a></li>
-            <li><a class="px-5 text-2xl font-bold underline" href="./data_pembayaran.php">Data Pembayaran</a></li>
+            <li><a class="px-5 text-2xl hover:underline" href="../data_kelas.php"><span class="sr-only">(current)</span>Data Kelas</a></li>
+            <li><a class="px-5 text-2xl hover:underline" href="../data_siswa.php">Data Siswa</a></li>
+            <li><a class="px-5 text-2xl first-letter hover:underline " href="../data_spp.php">Data SPP</a></li>
+            <li><a class="px-5 text-2xl hover:underline" href="../data_akun.php">Data Akun</a></li>
+            <li><a class="px-5 text-2xl font-bold underline" href="../data_pembayaran.php">Data Pembayaran</a></li>
         </ul>
         <div class="right-0 flex gap-4 ">
              <ul class="flex gap-4 py-4 text-white text-m">
-                <li><a class="px-5 text-2xl hover:underline" href="../CRUD/index.php">CRUD</a></li>
-                <li><a class="px-5 text-2xl hover:underline" href="../dashboard/index.php">Dashboard</a></li>
-                <li><a class="px-5 text-2xl hover:underline" href="../../login/logout.php">Logout</a></li>
+                <li><a class="px-5 text-2xl hover:underline" href="../../CRUD/index.php">CRUD</a></li>
+                <li><a class="px-5 text-2xl hover:underline" href="../../dashboard/index.php">Dashboard</a></li>
+                <li><a class="px-5 text-2xl hover:underline" href="../../../login/logout.php">Logout</a></li>
              </ul>
          </div>
          
@@ -84,7 +84,7 @@
                                 </th>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-[#E8E8E8]">
                                     
-                                   
+                               
                                 <select name="id_akun" class="p-2 bg-white">
                                     <?php 
                                         require("../../../connection.php");
@@ -103,8 +103,6 @@
                                     <?php } ?>
                                 </select>
 
-
-                                    
                                 </td>
                                 <?php 
                                     require("../../../connection.php");
