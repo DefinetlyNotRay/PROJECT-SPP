@@ -3,6 +3,9 @@
 	if($_SESSION['status']!="login"){
 		header("location:../index.php?msg=not_logged");
 	}
+  if($_SESSION["level"]!="admin"){
+    header("location:../index.php?msg=admin");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

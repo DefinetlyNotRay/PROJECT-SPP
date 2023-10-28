@@ -23,16 +23,12 @@
       </div>
       <div style="justify-content:space-between;" class="flex min-w-full px-4 py-5 bg-blue-600 py-auto w-fit">
         <ul class="flex gap-4 py-4 text-white text-m">
-            <li><a class="px-5 text-2xl hover:underline" href="../data_kelas.php"><span class="sr-only">(current)</span>Data Kelas</a></li>
-            <li><a class="px-5 text-2xl hover:underline " href="../data_siswa.php">Data Siswa</a></li>
-            <li><a class="px-5 text-2xl first-letter hover:underline " href="../data_spp.php">Data SPP</a></li>
-            <li><a class="px-5 text-2xl hover:underline" href="../data_akun.php">Data Akun</a></li>
-            <li><a class="px-5 text-2xl font-bold underline" href="../data_pembayaran.php">Data Pembayaran</a></li>
+        <li><a class="px-5 text-2xl font-bold underline" href="#">Entry Transaksi</a></li>
+          <li><a class="px-5 text-2xl hover:underline" href="./history.php">Lihat History</a></li>
         </ul>
         <div class="right-0 flex gap-4 ">
              <ul class="flex gap-4 py-4 text-white text-m">
-                <li><a class="px-5 text-2xl hover:underline" href="../../CRUD/index.php">CRUD</a></li>
-                <li><a class="px-5 text-2xl hover:underline" href="../../dashboard/index.php">Dashboard</a></li>
+                <li><a class="px-5 text-2xl hover:underline" href="../../dashboard/petugas.php">Dashboard</a></li>
                 <li><a class="px-5 text-2xl hover:underline" href="../../../login/logout.php">Logout</a></li>
              </ul>
          </div>
@@ -43,19 +39,19 @@
     <br><br><br><br><br><br><br>
         <div id="1440px" class="flex items-center justify-center">
             <section class="flex flex-col items-center justify-center gap-5 w-fit">
-                <form method="POST" action="../create/pembayaran.php" class="flex flex-col gap-5">
+                <form method="POST" action="./create/entry.php" class="flex flex-col gap-5">
                     <div class="flex flex-col gap-4 ">
 
                         <label class="text-2xl" for="username">Id Akun</label>
                         <select name="id_akun" class="p-2 text-2xl bg-white rounded-lg">
                         <?php
                             require("../../../connection.php");
-                            $query = mysqli_query($conn, "SELECT * FROM `data_akun` WHERE level IN ('admin', 'petugas')");
+                            $query = mysqli_query($conn,"SELECT * FROM `data_akun`");
                             $account_names = array();
 
                             while($row = mysqli_fetch_array($query)){
                                 $account_id = $row['id_akun'];
-                                $account_name = $row['nama'];
+                                $account_name = $row['username'];
                                 $account_names[$account_id] = $account_name; // Store in associative array
                                 
                             
@@ -65,7 +61,7 @@
                         </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
-                    <label class="text-2xl">NISN</label>
+                        <label class="text-2xl">NISN</label>
                         <select name="nisn" class="p-2 text-2xl bg-white rounded-lg">
                         <?php
                             require("../../../connection.php");
@@ -74,12 +70,11 @@
 
                             while($row = mysqli_fetch_array($query)){
                                 $account_id = $row['nisn'];
-                                $name = $row['nisn'];
                                 
                                 
                             
                         ?>
-                            <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $name?></option>
+                            <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $account_id?></option>
                         <?php } ?>
                         </select>
                     </div>
@@ -97,23 +92,22 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                     <label class="text-2xl">Id SPP</label>
-
                     <select name="id_spp" class="p-2 text-2xl bg-white rounded-lg">
                      
 
-                     <?php
-                         require("../../../connection.php");
-                         $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
-                         $account_names = array();
+                        <?php
+                            require("../../../connection.php");
+                            $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
+                            $account_names = array();
 
-                         while($row = mysqli_fetch_array($query)){
-                             $account_id = $row['id_spp'];
+                            while($row = mysqli_fetch_array($query)){
+                                $account_id = $row['id_spp'];
 
-                     ?>
-                         
-                         <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $account_id?></option>
-                     <?php } ?>
-                     </select>
+                        ?>
+                            
+                            <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $account_id?></option>
+                        <?php } ?>
+                        </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Jumlah Bayar</label>

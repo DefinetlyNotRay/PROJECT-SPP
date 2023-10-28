@@ -21,7 +21,9 @@
                 echo '<p class="mb-5 font-bold text-center">successfully logged out</p>';
             }else if($_GET['msg'] == "not_logged"){
                 echo '<p class="mb-5 font-bold text-center">You have to login first to access dashboard</p>';
-            } 
+            } else if($_GET['msg'] == "admin"){
+              echo '<p class="mb-5 font-bold text-center">You have to login as admin first to access this page</p>';
+          } 
         }
         ?>
             <p class="font-bold">Username:</p>
@@ -34,7 +36,7 @@
 
             <p class="font-bold">Password:</p>
             <input
-              type="text"
+              type="password"
               class="w-full mb-6 rounded-sm bg-blue-light h-11"
               style="padding-left: 1rem"
               name="password"

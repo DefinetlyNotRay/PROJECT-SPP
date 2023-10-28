@@ -10,4 +10,4 @@
     mysqli_query($conn,"UPDATE `data_akun` set username='$username', password='$password', nama='$nama',level='$level' where id_akun='$id'");
 
     header("location:../data_akun.php")
-    ?>
+?>
