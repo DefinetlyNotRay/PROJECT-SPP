@@ -47,8 +47,9 @@
                       $id = $_GET["nisn"];
                       $query = mysqli_query($conn,"SELECT * FROM `data_siswa` WHERE nisn = $id ");
                       $row = mysqli_fetch_array($query);
+                      
                     ?>
-                    <p class="mb-20 text-2xl font-bold text-center" class="nama"> <?php echo $row["nama"] ?></p>
+                    <p class="mb-20 text-2xl font-bold text-center" class="nama"> <?php echo $row["nama"]." | ".$_GET["tgl_bayar"] ?></p>
                     <table   class="w-[1440px] table-auto">
                     <thead>   
                             <tr class="text-center bg-blue-700">
@@ -141,7 +142,7 @@
         </div>
         <div class="flex justify-center mt-20">
                     <button id="download" class="inline-block px-6 py-2 text-center text-white bg-blue-600 border rounded hover:bg-blue-700">
-                        Genereate PDF
+                        Genereate Kwitansi
                     </button>
                     </div>
     </div>
@@ -155,13 +156,13 @@
         console.log(window);
         <?php 
          require("../../../connection.php");
-         $id = $_GET["id"];
+         $id = $_GET["nisn"];
          $query = mysqli_query($conn,"SELECT * FROM `data_siswa` WHERE nisn = $id ");
          $row = mysqli_fetch_array($query);
         ?>
         var opt = {
           margin: 1,
-          filename:'Data <?php echo $row["nama"] ?>.pdf',
+          filename:'Data <?php echo $row["nama"]."|".$_GET["tgl_bayar"]?>.pdf',
           image:{
             type: 'jpeg',
             quality: 0.98

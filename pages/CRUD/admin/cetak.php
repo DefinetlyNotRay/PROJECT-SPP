@@ -92,6 +92,8 @@
                             while($row = mysqli_fetch_array($query)){
                                 $query2 = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE id_akun = $row[id_akun]");
                                 $akun_data = mysqli_fetch_assoc($query2);
+                                $query3 = mysqli_query($conn,"SELECT * FROM `data_spp` WHERE id_spp = $row[id_spp]");
+                                $spp = mysqli_fetch_assoc($query3);
 
                             ?>
                             
@@ -115,7 +117,7 @@
                                     <?php echo $row["tahun_dibayar"] ?>
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                    <?php echo $row["id_spp"] ?>
+                                    <?php echo $spp["tahun"]." | ".$spp["nominal"] ?>
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
                                     <?php echo $row["jumlah_bayar"] ?>
