@@ -83,8 +83,11 @@
                                 $query = mysqli_query($conn,"SELECT * FROM `data_siswa`");
                                 while($row = mysqli_fetch_array($query)){
                                 $idRow = $row["id_kelas"];
+                                $id_spp = $row["id_spp"];
                                 $query2 = mysqli_query($conn,"SELECT * FROM `data_kelas` WHERE id_kelas = $idRow");
-                                $ex = mysqli_fetch_array($query2)
+                                $ex = mysqli_fetch_array($query2);
+                                $query3 = mysqli_query($conn,"SELECT * FROM `data_spp` WHERE id_spp = $id_spp");
+                                $spp = mysqli_fetch_assoc($query3);
                             ?>
                             <tr>
                                 <th class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
@@ -109,7 +112,7 @@
                                     <?php echo $row["no_telp"] ?>
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                    <?php echo $row["id_spp"] ?>
+                                    <?php echo $spp["tahun"]." | ".$spp["nominal"] ?>
                                 </td>
                                 <td class="text-center flex items-center justify-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-r border-[#E8E8E8]">
                                     <a href="./edit_page/siswa.php?id=<?php echo $row['nisn']; ?>" class="inline-block px-6 py-2 mr-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-600 hover:text-white">

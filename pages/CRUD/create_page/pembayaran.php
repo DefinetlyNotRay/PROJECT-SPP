@@ -15,7 +15,6 @@
     <link href="../../../dist/output.css" rel="stylesheet" />
   </head>
  
-  
   <body class="min-h-screen bg-blue-light">
  
   <nav class="fixed min-w-full">
@@ -47,7 +46,7 @@
                     <div class="flex flex-col gap-4 ">
 
                         <label class="text-2xl" for="username">Id Akun</label>
-                        <select name="id_akun" class="p-2 text-2xl bg-white rounded-lg">
+                        <select name="id_akun" class="p-2 text-2xl bg-white rounded-lg" required>
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn, "SELECT * FROM `data_akun` WHERE level IN ('admin', 'petugas')");
@@ -65,8 +64,8 @@
                         </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
-                    <label class="text-2xl">NISN</label>
-                        <select name="nisn" class="p-2 text-2xl bg-white rounded-lg">
+                        <label class="text-2xl">NISN</label>
+                        <select name="nisn" class="p-2 text-2xl bg-white rounded-lg" required>
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn,"SELECT * FROM `data_siswa`");
@@ -85,39 +84,60 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Tanggal Bayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="tgl_bayar" type="date" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="tgl_bayar" type="date" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Bulan Dibayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="bulan_dibayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <select name="bulan_dibayar" class="p-2 text-2xl bg-white rounded-lg" required>
+                            <option value="januari" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Januari</option>
+                            <option value="februari" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Februari</option>
+                            <option value="maret" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Maret</option>
+                            <option value="april" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">April</option>
+                            <option value="mei" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Mei</option>
+                            <option value="juni" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Juni</option>
+                            <option value="juli" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Juli</option>
+                            <option value="agustus" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Agustus</option>
+                            <option value="september" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">September</option>
+                            <option value="oktober" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Oktober</option>
+                            <option value="november" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">November</option>
+                            <option value="december" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">December</option>
+                        </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Tahun Dibayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="tahun_dibayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
-                    </div>
-                    <div class="flex flex-col gap-4 ">
-                    <label class="text-2xl">Id SPP</label>
-
-                    <select name="id_spp" class="p-2 text-2xl bg-white rounded-lg">
-                     
-
+                        <select name="tahun_dibayar" class="p-2 text-2xl bg-white rounded-lg" required>
                      <?php
                          require("../../../connection.php");
                          $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
                          $account_names = array();
 
                          while($row = mysqli_fetch_array($query)){
-                             $account_id = $row['id_spp'];
-
+                             $tahun_dibayar = $row['tahun'];
                      ?>
-                         
-                         <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $account_id?></option>
+                         <option value="<?php echo $tahun_dibayar ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $tahun_dibayar?></option>
                      <?php } ?>
                      </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
+                    <label class="text-2xl">Nominal & Tahun SPP</label>
+                    <select name="id_spp" class="p-2 text-2xl bg-white rounded-lg" required>
+                        <?php
+                            require("../../../connection.php");
+                            $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
+                            $account_names = array();
+
+                            while($row = mysqli_fetch_array($query)){
+                                $account_id = $row['id_spp'];
+                                $nominal_spp = $row['nominal'];
+                                $tahun_spp = $row['tahun'];
+                        ?>
+                            <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $tahun_spp?> | <?php echo $nominal_spp ?></option>
+                        <?php } ?>
+                    </select>
+                    </div>
+                    <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Jumlah Bayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="jumlah_bayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="jumlah_bayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <button type="submit" class="inline-block px-6 py-2 text-white bg-blue-600 border rounded hover:bg-blue-700">
                         Submit

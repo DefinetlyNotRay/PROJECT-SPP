@@ -110,6 +110,9 @@
                                     $id = $_GET["id"];
                                     $query = mysqli_query($conn,"SELECT * FROM `data_pembayaran` WHERE id_pembayaran=$id");
                                     while($row = mysqli_fetch_array($query)){
+                                    $id_spp = $row["id_spp"];
+                                    $sppQuery = mysqli_query($conn,"SELECT * FROM `data_spp` WHERE id_spp = $id_spp");
+                                    $spp = mysqli_fetch_array($sppQuery);
                                     
                                 
                                 
@@ -129,7 +132,9 @@
                                 </td>
                                 
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                    <input name="id_spp" class="text-center" value="<?php echo $row["id_spp"] ?>" readonly/>
+                                <input name="" class="text-center" value="<?php echo $spp['tahun'] . ' | ' . $spp['nominal']; ?>" placeholder="<?php echo $spp['tahun'] . ' | ' . $spp['nominal']; ?>" readonly/>
+                                <input type="hidden" name="id_spp" value="<?php echo $row['id_spp']; ?>" />
+
                                 </td>
                                 
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF]  border-b border-[#E8E8E8]">

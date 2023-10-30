@@ -46,20 +46,20 @@
                 <form method="POST" action="../create/akun.php" class="flex flex-col gap-5">
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl" for="username">Username</label>
-                        <input class="w-96 " name="username" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="w-96 " name="username" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Password</label>
-                        <input class="w-96 " name="password" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="w-96 " name="password" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Name</label>
-                        <input class="w-96 rounded-xl" name="nama" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="w-96 rounded-xl" name="nama" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Level</label>
                        
-                        <select name="level" class="pl-5 bg-white w-96 " style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem;">
+                        <select name="level" class="pl-5 bg-white w-96 " style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem;" required>
                             <option value="admin" > 
                                 Admin
                             </option>

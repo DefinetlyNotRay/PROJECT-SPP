@@ -84,14 +84,46 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Bulan Dibayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="bulan_dibayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <select name="bulan_dibayar" class="p-2 text-2xl bg-white rounded-lg">
+                            <option value="Januari" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Januari</option>
+                            <option value="Februari" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Februari</option>
+                            <option value="Maret" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Maret</option>
+                            <option value="April" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">April</option>
+                            <option value="Mei" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Mei</option>
+                            <option value="Juni" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Juni</option>
+                            <option value="Juli" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Juli</option>
+                            <option value="Agustus" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Agustus</option>
+                            <option value="September" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">September</option>
+                            <option value="Oktober" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Oktober</option>
+                            <option value="November" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">November</option>
+                            <option value="December" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">December</option>
+
+
+
+                        </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Tahun Dibayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="tahun_dibayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <select name="tahun_dibayar" class="p-2 text-2xl bg-white rounded-lg">
+                     
+
+                     <?php
+                         require("../../../connection.php");
+                         $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
+                         $account_names = array();
+
+                         while($row = mysqli_fetch_array($query)){
+                             $tahun_dibayar = $row['tahun'];
+                             
+
+                     ?>
+                         
+                         <option value="<?php echo $tahun_dibayar ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $tahun_dibayar?></option>
+                     <?php } ?>
+                     </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
-                    <label class="text-2xl">Id SPP</label>
+                    <label class="text-2xl">Nominal SPP</label>
                     <select name="id_spp" class="p-2 text-2xl bg-white rounded-lg">
                      
 
@@ -102,10 +134,12 @@
 
                             while($row = mysqli_fetch_array($query)){
                                 $account_id = $row['id_spp'];
+                                $nominal_spp = $row['nominal'];
+                                $tahun_spp = $row['tahun'];
 
                         ?>
                             
-                            <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $account_id?></option>
+                            <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $tahun_spp?> | <?php echo $nominal_spp ?> </option>
                         <?php } ?>
                         </select>
                     </div>

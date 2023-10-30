@@ -124,6 +124,8 @@
                                 $id = $_GET["id"];
                                 $query = mysqli_query($conn,"SELECT * FROM `data_siswa` WHERE nisn=$id");
                                 while($row = mysqli_fetch_array($query)){
+                                    $query2 = mysqli_query($conn,"SELECT * FROM `data_spp` ");
+                                    $row2 = mysqli_fetch_array($query2)
                             ?>
                                 <input type="hidden" name="id" value="<?php echo $row["nisn"] ?>" />
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
@@ -133,7 +135,24 @@
                                    <input type="text" name="no_telp" class="max-w-[150px] text-center" value="<?php echo $row["no_telp"] ?>" />
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                   <input type="text" name="id_spp" class="max-w-[150px] text-center" value="<?php echo $row["id_spp"] ?>" readonly/>
+                                <select name="id_spp" class="">
+                     
+
+                                <?php
+                                    require("../../../connection.php");
+                                    $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
+                                    $account_names = array();
+
+                                    while($row = mysqli_fetch_array($query)){
+                                        $account_id = $row['id_spp'];
+                                        $nominal_spp = $row['nominal'];
+                                        $tahun_spp = $row['tahun'];
+
+                                ?>
+                                    
+                                    <option value="<?php echo $account_id; ?>" ><?php echo $tahun_spp?> | <?php echo $nominal_spp ?> </option>
+                                <?php } ?>
+                                </select>
                                 </td>
                                 <td class="text-center flex items-center justify-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-r border-[#E8E8E8]">
                                         <button type="submit" class="inline-block px-6 py-2 mr-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-600 hover:text-white">

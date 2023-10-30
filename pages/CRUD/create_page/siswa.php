@@ -47,20 +47,20 @@
                     
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">NISN</label>
-                        <input class="pl-2 w-96" name="nisn" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96" name="nisn" type="text"style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">NIS</label>
-                        <input class="pl-2 w-96 rounded-xl" name="nis" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="nis" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Nama</label>
-                        <input class="pl-2 w-96 rounded-xl" name="nama" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="nama" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
 
                         <label class="text-2xl" for="username">Kelas</label>
-                        <select name="id_kelas" class="p-2 text-2xl bg-white rounded-lg">
+                        <select name="id_kelas" class="p-2 text-2xl bg-white rounded-lg" required>
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn,"SELECT * FROM `data_kelas`");
@@ -79,16 +79,16 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Alamat</label>
-                        <input class="pl-2 w-96 rounded-xl" name="alamat" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="alamat" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">No Telpon</label>
-                        <input class="pl-2 w-96 rounded-xl" name="no_telpon" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="no_telpon" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
 
                         <label class="text-2xl" for="username">SPP</label>
-                        <select name="spp" class="p-2 text-2xl bg-white rounded-lg">
+                        <select name="spp" class="p-2 text-2xl bg-white rounded-lg" required>
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
@@ -97,18 +97,19 @@
                             while($row = mysqli_fetch_array($query)){
                                 $class_id = $row['id_spp'];
                                 $class_name = $row['nominal'];
+                                $class_year = $row["tahun"];
                                 $class_names[$class_id] = $class_name; // Store in associative array
                                 
                             
                         ?>
-                            <option value="<?php echo $class_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $class_name?></option>
+                            <option value="<?php echo $class_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $class_year?> | <?php echo $class_name ?></option>
                         <?php } ?>
                         </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
 
                         <label class="text-2xl" for="username">Akun Siswa</label>
-                        <select name="akun" class="p-2 text-2xl bg-white rounded-lg">
+                        <select name="akun" class="p-2 text-2xl bg-white rounded-lg" required>
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE level IN ('siswa')");

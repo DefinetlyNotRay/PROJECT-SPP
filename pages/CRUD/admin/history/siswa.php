@@ -66,6 +66,9 @@
                                 <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4">
                                     Jumlah Bayar
                                 </th>
+                                <th class="w-1/6 min-w-[160px] text-lg font-semibold text-white py-4 lg:py-7 px-3 lg:px-4">
+                                     Status
+                                </th>
                                 
                             </tr>
                             </thead>
@@ -82,7 +85,8 @@
                             while($row = mysqli_fetch_array($query)){
                                 $query2 = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE id_akun = $row[id_akun]");
                                 $akun_data = mysqli_fetch_assoc($query2);
-
+                                $query3 = mysqli_query($conn,"SELECT * FROM `data_spp` WHERE id_spp = $row[id_spp]");
+                                $nominal_data = mysqli_fetch_assoc($query3);
                             ?>
                             
                             <tr>
@@ -105,12 +109,21 @@
                                     <?php echo $row["tahun_dibayar"] ?>
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
-                                    <?php echo $row["id_spp"] ?>
+                                    <?php echo $nominal_data["nominal"] ?>
                                 </td>
                                 <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
                                     <?php echo $row["jumlah_bayar"] ?>
                                 </td>
-
+                                <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
+                                    <?php 
+                                        if($row["jumlah_bayar"] < $nominal_data["nominal"]) {
+                                            echo "Belum Lunas";
+                                        } else {
+                                            echo "Lunas";
+                                        }
+                                    ?>
+                                </td>
+                            
                             </tr>
                             <?php } ?>
                             <!-- Add more rows as needed -->
