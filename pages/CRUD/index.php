@@ -9,13 +9,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Dashboard CRUD</title>
     <link href="../../dist/output.css" rel="stylesheet" />
   </head>
   
   <body class="min-h-screen bg-blue-light">
  
-    <nav class="fixed top-0">
+    <nav class="fixed top-0 z-50">
       <div>
       </div>
       <div class="flex justify-between w-screen px-4 py-5 bg-blue-600 py-auto">
@@ -38,7 +38,7 @@
         </div>
       </div>
     </nav>
-    <div class="">
+    <div class="relative z-0">
 
         <div class="" style="margin-top: 10rem; padding-left:20px;">
             <p class="text-3xl font-bold text-white">Welcome To The Dashboard!! 👋</p>

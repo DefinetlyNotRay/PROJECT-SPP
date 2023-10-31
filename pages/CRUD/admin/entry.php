@@ -9,7 +9,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Entry Transaksi</title>
     <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="../../../dist/output.css" rel="stylesheet" />
@@ -46,7 +46,7 @@
                         <select name="id_akun" class="p-2 text-2xl bg-white rounded-lg">
                         <?php
                             require("../../../connection.php");
-                            $query = mysqli_query($conn,"SELECT * FROM `data_akun`");
+                            $query = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE level IN ('admin', 'petugas')");
                             $account_names = array();
 
                             while($row = mysqli_fetch_array($query)){
@@ -61,8 +61,27 @@
                         </select>
                     </div>
                     <div class="flex flex-col gap-4 ">
+                        <label class="text-2xl">Kelas</label>
+                        <select id="kelasDropdown" name="kelas" class="p-2 text-2xl bg-white rounded-lg">
+                        <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select kelas</option>
+
+                        <?php
+                            require("../../../connection.php");
+                            $query = mysqli_query($conn,"SELECT * FROM `data_kelas` ");
+                            $account_names = array();
+
+                            while($row1 = mysqli_fetch_array($query)){
+                                
+                                
+                            
+                        ?>
+                            <option value="<?php echo $row1["id_kelas"]; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $row1["nama_kelas"]?></option>
+                        <?php } ?>
+                        </select>
+                    </div>
+                    <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">NISN</label>
-                        <select name="nisn" class="p-2 text-2xl bg-white rounded-lg">
+                        <select id="nisnDropdown" name="nisn" class="p-2 text-2xl bg-white rounded-lg">
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn,"SELECT * FROM `data_siswa`");
@@ -85,6 +104,8 @@
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Bulan Dibayar</label>
                         <select name="bulan_dibayar" class="p-2 text-2xl bg-white rounded-lg">
+                        <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select Month</option>
+
                             <option value="Januari" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Januari</option>
                             <option value="Februari" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Februari</option>
                             <option value="Maret" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Maret</option>
@@ -105,7 +126,8 @@
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Tahun Dibayar</label>
                         <select name="tahun_dibayar" class="p-2 text-2xl bg-white rounded-lg">
-                     
+                        <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select Year</option>
+
 
                      <?php
                          require("../../../connection.php");
@@ -154,5 +176,128 @@
             </section>
         </div>
     </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const kelasDropdown = document.getElementById('kelasDropdown');
+    const nisnDropdown = document.getElementById('nisnDropdown');
+    const bulanDropdown = document.getElementsByName('bulan_dibayar')[0];
+    const tahunDropdown = document.getElementsByName('tahun_dibayar')[0];
+
+    kelasDropdown.addEventListener('change', function() {
+        const selectedKelas = this.value;
+
+        nisnDropdown.innerHTML = '';
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.text = 'Select NISN';
+        nisnDropdown.appendChild(defaultOption);
+
+        const defaultBulanOption = document.createElement('option');
+        defaultBulanOption.value = '';
+        defaultBulanOption.text = 'Select Bulan';
+        bulanDropdown.appendChild(defaultBulanOption);
+
+        const defaultTahunOption = document.createElement('option');
+        defaultTahunOption.value = '';
+        defaultTahunOption.text = 'Select Tahun';
+        tahunDropdown.appendChild(defaultTahunOption);
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                data.forEach(function(item) {
+                    const option = document.createElement('option');
+                    option.value = item.nisn;
+                    option.text = item.nisn;
+                    nisnDropdown.appendChild(option);
+                });
+            }
+        };
+        xhr.open('GET', `./get_nisn_option.php?kelas=${selectedKelas}`, true);
+        xhr.send();
+    });
+
+    nisnDropdown.addEventListener('change', function() {
+        const selectedNisn = this.value;
+        const selectedTahun = tahunDropdown.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);  // Parse the response as JSON
+                const selectedBulan = bulanDropdown.value;
+                console.log(data)
+
+                // Iterate through the options and disable those that are in the list of paid months
+                for (let i = 0; i < bulanDropdown.options.length; i++) {
+                    const option = bulanDropdown.options[i];
+                    if (data.includes(option.value) && option.value !== selectedBulan) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                }
+            }
+        };
+        xhr.open('GET', `./get_paid_months.php?nisn=${selectedNisn}&tahun=${selectedTahun}`, true);
+        xhr.send();
+    });
+
+
+    bulanDropdown.addEventListener('change', function() {
+        const selectedBulan = this.value;
+        const selectedTahun = tahunDropdown.value;
+        const selectedNisn = nisnDropdown.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                console.log(data)
+
+                // Iterate through the options and disable those that are in the list of paid months
+                for (let i = 0; i < bulanDropdown.options.length; i++) {
+                    const option = bulanDropdown.options[i];
+                    if (data.includes(option.value) && option.value !== selectedBulan) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                }
+            }
+        };
+        xhr.open('GET', `./get_paid_months.php?nisn=${selectedNisn}&tahun=${selectedTahun}`, true);
+        xhr.send();
+        tahunDropdown.addEventListener('change', function() {
+        const selectedTahun = this.value;
+        const selectedNisn = nisnDropdown.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                const selectedBulan = bulanDropdown.value;
+
+                // Iterate through the options and enable those that are not in the list of paid months
+                for (let i = 0; i < bulanDropdown.options.length; i++) {
+                    const option = bulanDropdown.options[i];
+                    if (!data.includes(option.value) || option.value === selectedBulan) {
+                        option.disabled = false;
+                    } else {
+                        option.disabled = true;
+                    }
+                }
+            }
+        };
+        xhr.open('GET', `./get_paid_months.php?nisn=${selectedNisn}&tahun=${selectedTahun}`, true);
+        xhr.send();
+    });
+});
+});
+</script>
+
+
   </body>
 </html>

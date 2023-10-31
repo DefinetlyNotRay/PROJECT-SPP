@@ -9,7 +9,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Entry Transaksi</title>
     <link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="../../../dist/output.css" rel="stylesheet" />
@@ -46,7 +46,7 @@
                         <select name="id_akun" class="p-2 text-2xl bg-white rounded-lg">
                         <?php
                             require("../../../connection.php");
-                            $query = mysqli_query($conn,"SELECT * FROM `data_akun`");
+                            $query = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE level IN ('admin', 'petugas')");
                             $account_names = array();
 
                             while($row = mysqli_fetch_array($query)){
@@ -60,6 +60,23 @@
                         <?php } ?>
                         </select>
                     </div>
+                    <div class="flex flex-col gap-4 ">
+                        <label class="text-2xl">Kelas</label>
+                        <select name="kelas" class="p-2 text-2xl bg-white rounded-lg">
+                        <?php
+                            require("../../../connection.php");
+                            $query = mysqli_query($conn,"SELECT * FROM `data_siswa`");
+                            $account_names = array();
+
+                            while($row = mysqli_fetch_array($query)){
+                                $account_id = $row['nisn'];
+                                
+                                
+                            
+                        ?>
+                            <option value="<?php echo $account_id; ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $row["nama_kelas"]?></option>
+                        <?php } ?>
+                        </select>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">NISN</label>
                         <select name="nisn" class="p-2 text-2xl bg-white rounded-lg">
