@@ -7,5 +7,9 @@
 
     mysqli_query($conn, "INSERT INTO `data_akun`(username, password, nama, level) VALUE('$username','$password','$nama','$level')");
 
-    header("location:../data_akun.php") ;
+    if(mysqli_query($conn, "INSERT INTO `data_akun`(username, password, nama, level) VALUE('$username','$password','$nama','$level')")) {
+        header("location:../data_akun.php?success=true");
+    } else {
+        header("location:../data_akun.php?success=false");
+    }
 ?>

@@ -11,7 +11,10 @@
     $id_spp = $_POST["id_spp"];
    
 
-    mysqli_query($conn,"UPDATE `data_siswa` set nisn='$nisn',nis='$nis', nama='$nama',id_kelas='$kelas',alamat='$alamat',no_telp='$no_telpon',id_spp ='$id_spp' where nisn='$id'");
-
-    header("location:../data_siswa.php")
+    $result= mysqli_query($conn,"UPDATE `data_siswa` set nisn='$nisn',nis='$nis', nama='$nama',id_kelas='$kelas',alamat='$alamat',no_telp='$no_telpon',id_spp ='$id_spp' where nisn='$id'");
+    if($result){
+        header("location:../data_siswa.php?success=edited");
+    }else{
+        header("location:../data_siswa.php?success=false");
+    }
     ?>

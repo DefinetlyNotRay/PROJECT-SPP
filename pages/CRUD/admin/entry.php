@@ -102,6 +102,27 @@
                         <input class="pl-2 w-96 rounded-xl" name="tgl_bayar" type="date" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
                     </div>
                     <div class="flex flex-col gap-4 ">
+                        <label class="text-2xl">Tahun Dibayar</label>
+                        <select name="tahun_dibayar" class="p-2 text-2xl bg-white rounded-lg">
+                        <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select Year</option>
+
+
+                     <?php
+                         require("../../../connection.php");
+                         $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
+                         $account_names = array();
+
+                         while($row = mysqli_fetch_array($query)){
+                             $tahun_dibayar = $row['tahun'];
+                             
+
+                     ?>
+                         
+                         <option value="<?php echo $tahun_dibayar ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $tahun_dibayar?></option>
+                     <?php } ?>
+                     </select>
+                    </div>
+                    <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Bulan Dibayar</label>
                         <select name="bulan_dibayar" class="p-2 text-2xl bg-white rounded-lg">
                         <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select Month</option>
@@ -123,27 +144,7 @@
 
                         </select>
                     </div>
-                    <div class="flex flex-col gap-4 ">
-                        <label class="text-2xl">Tahun Dibayar</label>
-                        <select name="tahun_dibayar" class="p-2 text-2xl bg-white rounded-lg">
-                        <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select Year</option>
-
-
-                     <?php
-                         require("../../../connection.php");
-                         $query = mysqli_query($conn,"SELECT * FROM `data_spp`");
-                         $account_names = array();
-
-                         while($row = mysqli_fetch_array($query)){
-                             $tahun_dibayar = $row['tahun'];
-                             
-
-                     ?>
-                         
-                         <option value="<?php echo $tahun_dibayar ?>" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem"><?php echo $tahun_dibayar?></option>
-                     <?php } ?>
-                     </select>
-                    </div>
+                   
                     <div class="flex flex-col gap-4 ">
                     <label class="text-2xl">Nominal SPP</label>
                     <select name="id_spp" class="p-2 text-2xl bg-white rounded-lg">
@@ -183,6 +184,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const bulanDropdown = document.getElementsByName('bulan_dibayar')[0];
     const tahunDropdown = document.getElementsByName('tahun_dibayar')[0];
 
+    function updateMonthOptions() {
+        const selectedBulan = bulanDropdown.value;
+        const selectedTahun = tahunDropdown.value;
+        const selectedNisn = nisnDropdown.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+
+                // Iterate through the options and disable those that are in the list of paid months
+                for (let i = 0; i < bulanDropdown.options.length; i++) {
+                    const option = bulanDropdown.options[i];
+                    if (data.includes(option.value) && option.value !== selectedBulan) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                }
+            }
+        };
+        xhr.open('GET', `./get_paid_months.php?nisn=${selectedNisn}&tahun=${selectedTahun}`, true);
+        xhr.send();
+    }
+
     kelasDropdown.addEventListener('change', function() {
         const selectedKelas = this.value;
 
@@ -217,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.open('GET', `./get_nisn_option.php?kelas=${selectedKelas}`, true);
         xhr.send();
+        updateMonthOptions();
     });
 
     nisnDropdown.addEventListener('change', function() {
@@ -228,7 +255,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);  // Parse the response as JSON
                 const selectedBulan = bulanDropdown.value;
-                console.log(data)
 
                 // Iterate through the options and disable those that are in the list of paid months
                 for (let i = 0; i < bulanDropdown.options.length; i++) {
@@ -243,8 +269,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.open('GET', `./get_paid_months.php?nisn=${selectedNisn}&tahun=${selectedTahun}`, true);
         xhr.send();
+        updateMonthOptions();
     });
-
 
     bulanDropdown.addEventListener('change', function() {
         const selectedBulan = this.value;
@@ -270,7 +296,10 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.open('GET', `./get_paid_months.php?nisn=${selectedNisn}&tahun=${selectedTahun}`, true);
         xhr.send();
-        tahunDropdown.addEventListener('change', function() {
+        updateMonthOptions();
+    });
+
+    tahunDropdown.addEventListener('change', function() {
         const selectedTahun = this.value;
         const selectedNisn = nisnDropdown.value;
 
@@ -293,9 +322,12 @@ document.addEventListener('DOMContentLoaded', function() {
         };
         xhr.open('GET', `./get_paid_months.php?nisn=${selectedNisn}&tahun=${selectedTahun}`, true);
         xhr.send();
+        updateMonthOptions();
     });
+
+    updateMonthOptions();
 });
-});
+
 </script>
 
 

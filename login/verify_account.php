@@ -24,14 +24,14 @@ if ($row = $result->fetch_assoc()) {
 
     if ($row['level'] == 'admin') {
         $_SESSION["level"] = "admin";
-        header("location:../pages/dashboard/index.php");
+        header("location:../pages/dashboard/index.php?login=success");
     } else if ($row['level'] == 'petugas') {
         $_SESSION["level"] = "petugas";
-        header("location:../pages/dashboard/petugas.php");
+        header("location:../pages/dashboard/petugas.php?login=success");
     } else if($row['level'] == 'siswa'){
         $_SESSION["level"] = "siswa";
         $_SESSION["akun"] = $ex["id_akun"];
-        header("location:../pages/dashboard/siswa.php");
+        header("location:../pages/dashboard/siswa.php?login=success");
     }
 } else {
     // If no match is found, redirect back to index.php with a message

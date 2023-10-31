@@ -9,6 +9,12 @@
  $spp = $_POST["spp"];
  $id_akun = $_POST["akun"];
 
- mysqli_query($conn,"INSERT INTO `data_siswa` VALUE('$nisn','$nis','$nama','$kelas','$alamat','$no_telpon','$spp','$id_akun') ");
- header("location:../data_siswa.php")
+ $result = mysqli_query($conn,"INSERT INTO `data_siswa` VALUE('$nisn','$nis','$nama','$kelas','$alamat','$no_telpon','$spp','$id_akun') ");
+ if($result){
+     header("location:../data_siswa.php?success=true");
+ }else{
+     header("location:../data_siswa.php?success=false");
+ }
+ 
+ 
 ?>

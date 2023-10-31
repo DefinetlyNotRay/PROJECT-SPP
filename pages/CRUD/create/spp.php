@@ -5,5 +5,11 @@
 
     mysqli_query($conn, "INSERT INTO `data_spp`(tahun,nominal) VALUE('$tahun','$nominal')");
 
-    header("location:../data_spp.php") ;
+
+    if( mysqli_query($conn, "INSERT INTO `data_spp`(tahun,nominal) VALUE('$tahun','$nominal')")){
+        header("location:../data_spp.php?success=true");
+     }else{
+        header("location:../data_spp.php?success=false");
+    
+     }
 ?>

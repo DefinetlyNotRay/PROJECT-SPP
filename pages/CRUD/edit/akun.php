@@ -7,7 +7,10 @@
     $nama = $_POST["nama"];
     $level = $_POST["level"];
 
-    mysqli_query($conn,"UPDATE `data_akun` set username='$username', password='$password', nama='$nama',level='$level' where id_akun='$id'");
-
-    header("location:../data_akun.php")
+    $result = mysqli_query($conn,"UPDATE `data_akun` set username='$username', password='$password', nama='$nama',level='$level' where id_akun='$id'");
+    if($result){
+        header("location:../data_akun.php?success=edited");
+    }else{
+        header("location:../data_akun.php?success=false");
+    }
 ?>

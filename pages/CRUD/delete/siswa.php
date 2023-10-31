@@ -9,12 +9,16 @@
     // gets the data associated with COUNT(id) column
     $totalRecords = mysqli_fetch_assoc($totalId)['COUNT(nisn)'];
 
-    mysqli_query($conn, "DELETE FROM `data_siswa` WHERE nisn = '$id' ");  
-
+    $result =mysqli_query($conn, "DELETE FROM `data_siswa` WHERE nisn = '$id' ");  
+    if($result){
+        header("location:../data_siswa.php?success=deleted");
+    }else{
+        header("location:../data_siswa.php?success=false");
+    }
     // Reset auto increment value
     mysqli_query($conn, "ALTER TABLE `data_siswa` AUTO_INCREMENT = $totalRecords");
 
 
     // redericts to the data_siswa.php
-    header("location:../data_siswa.php");
+   
 ?>  

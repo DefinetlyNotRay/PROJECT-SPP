@@ -9,12 +9,16 @@
     // gets the data associated with COUNT(id) column
     $totalRecords = mysqli_fetch_assoc($totalId)['COUNT(id_kelas)'];
 
-    mysqli_query($conn, "DELETE FROM `data_kelas` WHERE id_kelas = '$id' ");  
-
+    $result = mysqli_query($conn, "DELETE FROM `data_kelas` WHERE id_kelas = '$id' ");  
+    if($result){
+        // redericts to the data_kelas.php?success=deleted
+        header("location:../data_kelas.php?success=deleted");
+    }else{
+        header("location:../data_kelas.php?success=false");
+    }
     // Reset auto increment value
     mysqli_query($conn, "ALTER TABLE `data_kelas` AUTO_INCREMENT = $totalRecords");
 
 
     // redericts to the data_kelas.php
-    header("location:../data_kelas.php");
 ?>  

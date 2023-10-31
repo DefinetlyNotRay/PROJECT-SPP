@@ -4,6 +4,10 @@
     $kompetensi_keahlian = $_POST["kompetensi_keahlian"];
 
     mysqli_query($conn, "INSERT INTO `data_kelas`(nama_kelas,kompetensi_keahlian) VALUE('$kelas','$kompetensi_keahlian')");
-
-    header("location:../data_kelas.php") ;
+    if(mysqli_query($conn, "INSERT INTO `data_kelas`(nama_kelas,kompetensi_keahlian) VALUE('$kelas','$kompetensi_keahlian')")){
+        header("location:../data_kelas.php?success=true") ;
+    }else{
+        header("location:../data_kelas.php?success=false") ;
+    }
+    
 ?>

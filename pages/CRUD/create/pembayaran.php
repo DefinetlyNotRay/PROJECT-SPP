@@ -54,5 +54,5 @@ if($jumlah_bayar == $nominal_spp*2){
 };
 
  
- header("location:../data_pembayaran.php")
+ header("location:../data_pembayaran?success=true.php")
 ?>

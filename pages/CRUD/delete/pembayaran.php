@@ -9,7 +9,7 @@
     // gets the data associated with COUNT(id) column
     $totalRecords = mysqli_fetch_assoc($totalId)['COUNT(id_pembayaran)'];
 
-    mysqli_query($conn, "DELETE FROM `data_pembayaran` WHERE id_pembayaran = '$id' ");  
+    $result =mysqli_query($conn, "DELETE FROM `data_pembayaran` WHERE id_pembayaran = '$id' ");  
 
     // Reset auto increment value
     mysqli_query($conn, "ALTER TABLE `data_pembayaran` AUTO_INCREMENT = $totalRecords");
