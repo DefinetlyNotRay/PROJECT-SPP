@@ -23,8 +23,8 @@
       <div style="justify-content:space-between;" class="flex min-w-full px-4 py-5 bg-blue-600 py-auto w-fit">
         <ul class="flex gap-4 py-4 text-white text-m">
         <li><a class="px-5 text-2xl hover:underline" href="./entry.php">Entry Transaksi</a></li>
-          <li><a class="px-5 text-2xl font-bold underline " href="./history.php">Lihat History</a></li>
-          <li><a class="px-5 text-2xl hover:underline " href="./laporan.php">Generate Laporan</a></li>
+          <li><a class="px-5 text-2xl hover:underline " href="./history.php">Lihat History</a></li>
+          <li><a class="px-5 text-2xl font-bold underline " href="./laporan.php">Generate Laporan</a></li>
 
         </ul>
         <div class="right-0 flex gap-4 ">
@@ -90,7 +90,10 @@
                             require("../../../connection.php");
                             $no = 1;
                             $id = $_GET["id"];
-                            $query = mysqli_query($conn,"SELECT * FROM `data_pembayaran` WHERE nisn = $id");
+                            $startDate = $_GET["startDate"];
+                            $endDate = $_GET["endDate"];
+
+                            $query = mysqli_query($conn,"SELECT * FROM `data_pembayaran` WHERE nisn = $id AND tgl_bayar BETWEEN '$startDate' AND '$endDate' ");
                             while($row = mysqli_fetch_array($query)){
                                 $query2 = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE id_akun = $row[id_akun]");
                                 $akun_data = mysqli_fetch_assoc($query2);

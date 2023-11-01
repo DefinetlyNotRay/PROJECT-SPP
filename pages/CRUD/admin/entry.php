@@ -25,6 +25,8 @@
         <ul class="flex gap-4 py-4 text-white text-m">
         <li><a class="px-5 text-2xl font-bold underline" href="#">Entry Transaksi</a></li>
           <li><a class="px-5 text-2xl hover:underline" href="./history.php">Lihat History</a></li>
+          <li><a class="px-5 text-2xl hover:underline" href="./laporan.php">Generate Laporan</a></li>
+
         </ul>
         <div class="right-0 flex gap-4 ">
              <ul class="flex gap-4 py-4 text-white text-m">
@@ -43,7 +45,7 @@
                     <div class="flex flex-col gap-4 ">
 
                         <label class="text-2xl" for="username">Id Akun</label>
-                        <select name="id_akun" class="p-2 text-2xl bg-white rounded-lg">
+                        <select name="id_akun" class="p-2 text-2xl bg-white rounded-lg" required>
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn,"SELECT * FROM `data_akun` WHERE level IN ('admin', 'petugas')");
@@ -62,7 +64,7 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Kelas</label>
-                        <select id="kelasDropdown" name="kelas" class="p-2 text-2xl bg-white rounded-lg">
+                        <select id="kelasDropdown" name="kelas" class="p-2 text-2xl bg-white rounded-lg" required>
                         <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select kelas</option>
 
                         <?php
@@ -81,7 +83,7 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">NISN</label>
-                        <select id="nisnDropdown" name="nisn" class="p-2 text-2xl bg-white rounded-lg">
+                        <select id="nisnDropdown" name="nisn" class="p-2 text-2xl bg-white rounded-lg" required>
                         <?php
                             require("../../../connection.php");
                             $query = mysqli_query($conn,"SELECT * FROM `data_siswa`");
@@ -99,11 +101,11 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Tanggal Bayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="tgl_bayar" type="date" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="tgl_bayar" type="date" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Tahun Dibayar</label>
-                        <select name="tahun_dibayar" class="p-2 text-2xl bg-white rounded-lg">
+                        <select name="tahun_dibayar" class="p-2 text-2xl bg-white rounded-lg" required>
                         <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select Year</option>
 
 
@@ -124,7 +126,7 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Bulan Dibayar</label>
-                        <select name="bulan_dibayar" class="p-2 text-2xl bg-white rounded-lg">
+                        <select name="bulan_dibayar" class="p-2 text-2xl bg-white rounded-lg" required>
                         <option value="" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Select Month</option>
 
                             <option value="Januari" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">Januari</option>
@@ -147,7 +149,7 @@
                    
                     <div class="flex flex-col gap-4 ">
                     <label class="text-2xl">Nominal SPP</label>
-                    <select name="id_spp" class="p-2 text-2xl bg-white rounded-lg">
+                    <select name="id_spp" class="p-2 text-2xl bg-white rounded-lg" required>
                      
 
                         <?php
@@ -168,7 +170,7 @@
                     </div>
                     <div class="flex flex-col gap-4 ">
                         <label class="text-2xl">Jumlah Bayar</label>
-                        <input class="pl-2 w-96 rounded-xl" name="jumlah_bayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem">
+                        <input class="pl-2 w-96 rounded-xl" name="jumlah_bayar" type="text" style="border-radius: 5px; width: 87rem; height:3rem; font-size:1.5rem" required>
                     </div>
                     <button type="submit" class="inline-block px-6 py-2 text-white bg-blue-600 border rounded hover:bg-blue-700">
                         Submit
