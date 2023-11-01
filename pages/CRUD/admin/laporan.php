@@ -3,6 +3,8 @@
 	if($_SESSION['status']!="login"){
 		header("location:../index.php?msg=not_logged");
 	}
+    
+?>
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,8 +96,9 @@
                         <?php 
                             require("../../../connection.php");
                             $no = 1;
-                            $startDate = $_GET['startDate'];
-                            $endDate = $_GET['endDate'];
+                            $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
+                            $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
+                      
                             if(isset($_GET['startDate']) && isset($_GET['startDate'])){
                                 $query = mysqli_query($conn,"SELECT * FROM `data_pembayaran` WHERE tgl_bayar BETWEEN '$startDate' AND '$endDate'");
 
@@ -151,10 +154,10 @@
                     <?php 
                         $query = mysqli_query($conn,"SELECT * FROM `data_pembayaran` WHERE tgl_bayar BETWEEN '$startDate' AND '$endDate'");
                         $row = mysqli_fetch_array($query);
-
+                        
                     ?>
                     <!-- Redirect to cetak-tanggal with params -->
-                    <a href="./cetak-tanggal.php?id=<?php echo $row['nisn']?>&startDate=<?php echo $_GET['startDate'] ?>&endDate=<?php echo  $_GET['endDate'] ?>"" class="inline-block px-6 py-2 text-white bg-blue-600 border rounded hover:bg-blue-700">
+                    <a href="./cetak-tanggal.php?id=<?php echo $row['nisn']?>&startDate=<?php echo $startDate ?>&endDate=<?php echo  $endDate ?>"" class="inline-block w-full text-center mt-10 px-6 py-2 text-white bg-blue-600 border rounded hover:bg-blue-700">
                         Print
                     </a>
                 </div>

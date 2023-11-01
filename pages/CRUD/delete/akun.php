@@ -1,24 +1,27 @@
 <?php
+    // Membutuhkan file koneksi
     require("../../../connection.php");
 
     $id = $_GET["id"];
 
-    // counts the total rows in the column id
+    // Menghitung jumlah total baris di kolom id
     $totalId = mysqli_query($conn, "SELECT COUNT(id_akun) FROM data_akun;");
 
-    // gets the data associated with COUNT(id) column
+    // Mendapatkan data yang terkait dengan kolom COUNT(id) 
     $totalRecords = mysqli_fetch_assoc($totalId)['COUNT(id_akun)'];
 
+    // Menghapus data dari tabel `data_akun`
     $result = mysqli_query($conn, "DELETE FROM `data_akun` WHERE id_akun = '$id' ");  
+
     if($result){
-        // redericts to the data_akun.php?success=deleted
+        // Mengarahkan pengguna ke data_akun.php dengan parameter success=deleted
         header("location:../data_akun.php?success=deleted");
-    }else{
+    } else {
+        // Jika tidak berhasil, arahkan pengguna ke data_akun.php dengan parameter success=false
         header("location:../data_akun.php?success=false");
     }
-    // Reset auto increment value
-    mysqli_query($conn, "ALTER TABLE `data_akun` AUTO_INCREMENT = $totalRecords");
-    
 
-    // redericts to the data_akun.php
-?>  
+    // Mengatur ulang nilai auto increment
+    mysqli_query($conn, "ALTER TABLE `data_akun` AUTO_INCREMENT = $totalRecords");
+
+?>

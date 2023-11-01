@@ -1,24 +1,27 @@
 <?php
+    // Membutuhkan file koneksi
     require("../../../connection.php");
 
     $id = $_GET["id"];
 
-    // counts the total rows in the column id
+    // Menghitung jumlah total baris di kolom nisn
     $totalId = mysqli_query($conn, "SELECT COUNT(nisn) FROM data_siswa;");
 
-    // gets the data associated with COUNT(id) column
+    // Mendapatkan data yang terkait dengan kolom COUNT(nisn) 
     $totalRecords = mysqli_fetch_assoc($totalId)['COUNT(nisn)'];
 
+    // Menghapus data dari tabel `data_siswa`
     $result =mysqli_query($conn, "DELETE FROM `data_siswa` WHERE nisn = '$id' ");  
+
     if($result){
+        // Mengarahkan pengguna ke data_siswa.php dengan parameter success=deleted
         header("location:../data_siswa.php?success=deleted");
-    }else{
+    } else {
+        // Jika tidak berhasil, arahkan pengguna ke data_siswa.php dengan parameter success=false
         header("location:../data_siswa.php?success=false");
     }
-    // Reset auto increment value
+
+    // Mengatur ulang nilai auto increment
     mysqli_query($conn, "ALTER TABLE `data_siswa` AUTO_INCREMENT = $totalRecords");
 
-
-    // redericts to the data_siswa.php
-   
 ?>  

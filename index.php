@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <link href="../dist/output.css" rel="stylesheet" />
+    <link href="./dist/output.css" rel="stylesheet" />
   </head>
   <body class="flex flex-col items-center justify-center min-h-screen bg-blue">
   <?php
     $login = isset($_GET['msg']) ? $_GET['msg'] : '';
     $successMessage = '';
+    // check status msg and display if login meets requirements
     if($login == 'logout'){
     $successMessage =  '<div id="successAlert" class="flex items-center p-4 mt-20 mb-4 text-sm text-green-800 border border-green-300 rounded-lg w-screeb bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
     <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -34,9 +35,10 @@ echo $successMessage;
       <div class="bg-white rounded-md wrapper w-96">
       
         <div class="flex flex-col items-start p-11">
-          <form action="../login/verify_account.php" method="post" class="w-full"
+          <form action="./login/verify_account.php" method="post" class="w-full"
           >
           <?php 
+          // gets msg params 
         if(isset($_GET['msg'])){
             if($_GET['msg'] == "failed"){
                 echo '<p class="mb-5 font-bold text-center">Failed to Login, your username or password is wrong!</p>';
@@ -83,6 +85,7 @@ echo $successMessage;
       }
     </style>
     <script>
+      // closing pop up 
     document.addEventListener('DOMContentLoaded', function() {
         const closeButton = document.getElementById('closeButton');
         const successAlert = document.getElementById('successAlert');

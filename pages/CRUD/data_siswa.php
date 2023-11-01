@@ -200,6 +200,7 @@ if($success == 'true'){
     </div>
     </section>
     <script>
+        // making pop up closeable
     document.addEventListener('DOMContentLoaded', function() {
         const closeButton = document.getElementById('closeButton');
         const successAlert = document.getElementById('successAlert');

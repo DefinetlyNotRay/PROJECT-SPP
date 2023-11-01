@@ -38,8 +38,10 @@
     <section class="flex justify-center min-w-full lg:py-[120px]">
     <div class="container ">
     <?php
+    // gets success param
     $success = isset($_GET['success']) ? $_GET['success'] : '';
     $successMessage = '';
+    // checks param value
 if($success == 'true'){
     $successMessage = 
     '<div id="successAlert" class="flex items-center p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
@@ -199,7 +201,7 @@ if($success == 'true'){
 
                             </tr>
                            <?php } ?>
-                            <!-- Add more rows as needed -->
+                          
                         </tbody>
                     </table>
                 </div>
@@ -208,6 +210,7 @@ if($success == 'true'){
     </div>
     </section>
     <script>
+        // make pop up closeable
     document.addEventListener('DOMContentLoaded', function() {
         const closeButton = document.getElementById('closeButton');
         const successAlert = document.getElementById('successAlert');

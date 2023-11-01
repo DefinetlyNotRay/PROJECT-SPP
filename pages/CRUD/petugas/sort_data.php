@@ -1,11 +1,14 @@
 <?php
+// Membutuhkan file koneksi
 require("../../../connection.php");
 
 $id_kelas = $_GET['id_kelas'];
 
 if($id_kelas == "all"){
+    // Jika id_kelas adalah "all", ambil semua data siswa
     $query = mysqli_query($conn, "SELECT * FROM `data_siswa`");
-} else{ 
+} else { 
+    // Jika id_kelas adalah ID kelas tertentu, ambil data siswa sesuai dengan kelas tersebut
     $query = mysqli_query($conn, "SELECT * FROM `data_siswa` WHERE id_kelas = $id_kelas"); 
 }
 
@@ -27,7 +30,7 @@ while ($row = mysqli_fetch_array($query)) {
         <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">' . $row["id_spp"] . '</td>
         <td class="text-center flex items-center justify-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-r border-[#E8E8E8]">
             <a href="./history/siswa.php?id=' . $row['nisn'] . '" class="inline-block px-6 py-2 mr-2 text-blue-600 border border-blue-600 rounded hover:bg-blue-600 hover:text-white">
-                History
+                Riwayat
             </a>
         </td>
     </tr>';

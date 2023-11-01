@@ -10,11 +10,16 @@
     $totalRecords = mysqli_fetch_assoc($totalId)['COUNT(id_pembayaran)'];
 
     $result =mysqli_query($conn, "DELETE FROM `data_pembayaran` WHERE id_pembayaran = '$id' ");  
+    if($result){
+        header("location:../data_pembayaran.php?success=deleted");
+    }else{
+        header("location:../data_pembayaran.php?success=false");
 
+    }
     // Reset auto increment value
     mysqli_query($conn, "ALTER TABLE `data_pembayaran` AUTO_INCREMENT = $totalRecords");
-
+    
 
     // redericts to the data_pembayaran.php
-    header("location:../data_pembayaran.php");
+    
 ?>  

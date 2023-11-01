@@ -131,7 +131,7 @@
                     </table>
                     <div>
              
-                    <a href="../cetak.php?id=<?php echo $id ?>" class="inline-block px-6 py-2 text-white bg-blue-600 border rounded hover:bg-blue-700">
+                    <a href="../cetak.php?id=<?php echo $id ?>" class="inline-block px-6 w-full mt-10 py-2 text-center text-white bg-blue-600 border rounded hover:bg-blue-700">
                         Print
                     </a>
                     

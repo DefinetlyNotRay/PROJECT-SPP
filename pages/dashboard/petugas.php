@@ -35,8 +35,10 @@
     </nav>
     <div class="flex justify-center w-full">
     <?php
+    // gets login params
     $login = isset($_GET['login']) ? $_GET['login'] : '';
     $successMessage = '';
+    // checks login value
     if($login == 'success'){
     $successMessage =  '<div id="successAlert" class="flex items-center p-4 mt-20 mb-4 text-sm text-green-800 border border-green-300 rounded-lg w-screeb bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800" role="alert">
     <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
